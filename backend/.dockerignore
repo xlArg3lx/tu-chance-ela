@@ -1,0 +1,7 @@
+node_modules
+vendor
+.git
+.idea
+.env
+.DS_Store
+docker/mysql/data
