@@ -1,0 +1,126 @@
+// Variables
+:root {
+  --page-margin: 24px;
+  --border-radius: 10px;
+  --transition-duration: 0.3s;
+}
+
+// Contenedor principal
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+// Encabezado de sección
+.section-header {
+  margin-bottom: 30px;
+  h1 {
+    color: var(--ion-color-dark);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+  }
+  p {
+    color: var(--ion-color-medium);
+    margin: 8px 0 0;
+  }
+}
+
+// Contenedor de spinner
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+// Estilos de la tabla
+.table-container {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    background-color: var(--ion-color-primary);
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 500;
+    &:first-child {
+      border-top-left-radius: var(--border-radius);
+    }
+    &:last-child {
+      border-top-right-radius: var(--border-radius);
+    }
+  }
+
+  td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--ion-color-light);
+  }
+
+  .table-row {
+    transition: background-color var(--transition-duration);
+    &:nth-child(even) {
+      background-color: var(--ion-color-light-shade);
+    }
+    &:hover {
+      background-color: var(--ion-color-light);
+    }
+  }
+
+  .actions-column {
+    white-space: nowrap;
+    ion-button {
+      margin: 0 5px;
+    }
+  }
+}
+
+// Botón flotante
+ion-fab {
+  margin: 20px;
+  ion-fab-button {
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .table-container {
+    margin: 0 -16px;
+    border-radius: 0;
+  }
+
+  .custom-table {
+    th,
+    td {
+      padding: 10px;
+    }
+  }
+}
+
+.filter-section {
+  margin-bottom: 20px;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+
+  ion-item {
+    --background: transparent;
+    --border-color: transparent;
+  }
+
+  ion-select {
+    width: 100%;
+    max-width: 200px;
+  }
+}

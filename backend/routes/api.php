@@ -9,6 +9,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware(['jwt.verify'])->group(function () {
+    Route::get('alumnos', [AlumnoController::class, 'index']);
     Route::post('crear-alumno', [AlumnoController::class, 'crear']);
     Route::get('consultar-alumno/{idGrado}', [AlumnoController::class, 'consultarPorGrado']);
 });

@@ -1,0 +1,89 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-left">Sistema Escolar</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" fill="clear" color="light">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="page-container">
+    <!-- Header Section -->
+    <div class="section-header">
+      <h1>Lista de Alumnos</h1>
+      <p>Gestión y control de estudiantes</p>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="spinner-container" *ngIf="loading">
+      <ion-spinner name="circular"></ion-spinner>
+    </div>
+
+    <!-- Filtro de Grados -->
+    <div class="filter-section" *ngIf="!loading">
+      <ion-item>
+        <ion-label>Filtrar por Grado</ion-label>
+        <ion-select
+          [(ngModel)]="gradoSeleccionado"
+          (ionChange)="filtrarPorGrado()"
+        >
+          <ion-select-option [value]="0">Todos los grados</ion-select-option>
+          <ion-select-option [value]="1">1° Grado</ion-select-option>
+          <ion-select-option [value]="2">2° Grado</ion-select-option>
+          <ion-select-option [value]="3">3° Grado</ion-select-option>
+          <ion-select-option [value]="4">4° Grado</ion-select-option>
+          <ion-select-option [value]="5">5° Grado</ion-select-option>
+          <ion-select-option [value]="6">6° Grado</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!-- Tabla de Alumnos -->
+    <div class="table-container" *ngIf="!loading">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Fecha Nacimiento</th>
+            <th>Nombre del Padre</th>
+            <th>Nombre de la Madre</th>
+            <th>Grado</th>
+            <th>Sección</th>
+            <th>Fecha Ingreso</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let alumno of alumnos" class="table-row">
+            <td>{{ alumno.nombre }}</td>
+            <td>{{ alumno.fecha_nacimiento | date:'dd/MM/yyyy' }}</td>
+            <td>{{ alumno.nombre_padre }}</td>
+            <td>{{ alumno.nombre_madre }}</td>
+            <td>{{ alumno.grado }}</td>
+            <td>{{ alumno.seccion }}</td>
+            <td>{{ alumno.fecha_ingreso | date:'dd/MM/yyyy' }}</td>
+            <td class="actions-column">
+              <ion-button fill="clear" color="primary" size="small">
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" color="danger" size="small">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Botón Flotante para Agregar -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="primary">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-content>

@@ -1,6 +1,20 @@
 version: "3.8"
 
 services:
+    # Servicio Frontend
+    frontend:
+        build:
+            context: ../front-end # Ajusta esta ruta
+            dockerfile: Dockerfile
+        container_name: escuela-frontend
+        restart: unless-stopped
+        ports:
+            - "8100:80"
+        networks:
+            - escuela-network
+        depends_on:
+            - nginx
+
     # Servicio PHP
     app:
         build:

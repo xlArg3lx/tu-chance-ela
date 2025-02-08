@@ -16,6 +16,11 @@ class AlumnoController extends Controller
         $this->alumnoService = $alumnoService;
     }
 
+    public function index()
+    {
+        return $this->alumnoService->getAllAlumnos();
+    }
+
     public function crear(Request $request)
     {
         return $this->alumnoService->crearAlumno($request);

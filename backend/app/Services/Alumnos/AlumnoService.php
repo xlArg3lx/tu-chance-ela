@@ -10,6 +10,27 @@ use Illuminate\Validation\ValidationException;
 
 class AlumnoService implements AlumnoServiceInterface
 {
+    public function getAllAlumnos()
+    {
+        try {
+            $alumnos = Alumno::all();
+
+            if ($alumnos->isEmpty()) {
+                return response()->json([
+                    'message' => 'No se encontraron alumnos registrados',
+                    'data' => []
+                ], 200);
+            }
+
+            return response()->json($alumnos, 200);
+        } catch (\Exception $e) {
+            Log::error('Error al obtener alumnos: ' . $e->getMessage());
+            return response()->json([
+                'error' => 'Error interno del servidor.',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
     public function crearAlumno($request)
     {
         try {
