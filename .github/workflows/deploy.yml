@@ -2,27 +2,28 @@ name: Deploy to Production
 
 on:
   push:
-    branches: [feature/argenedisAlvarez] # o master, según tu rama principal
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Install CapRover CLI
         run: npm install -g caprover
 
+      - name: Test CapRover Connection
+        run: |
+          echo "Testing connection to CapRover..."
+          echo "URL: ${{ secrets.CAPROVER_URL }}"
+          # No imprimas la contraseña real en los logs
+          echo "App name: ${{ secrets.CAPROVER_APP_NAME }}"
+
       - name: Deploy to CapRover
-        env:
-          CAPROVER_URL: ${{ secrets.CAPROVER_URL }}
-          CAPROVER_PASSWORD: ${{ secrets.CAPROVER_PASSWORD }}
-          CAPROVER_APP_NAME: ${{ secrets.CAPROVER_APP_NAME }}
         run: |
           caprover deploy \
-            -h "$CAPROVER_URL" \
-            -p "$CAPROVER_PASSWORD" \
-            -a "$CAPROVER_APP_NAME" \
-            -b main
+            --caproverUrl "${{ secrets.CAPROVER_URL }}" \
+            --caproverPassword "${{ secrets.CAPROVER_PASSWORD }}" \
+            --appName "${{ secrets.CAPROVER_APP_NAME }}" \
+            --branch main
