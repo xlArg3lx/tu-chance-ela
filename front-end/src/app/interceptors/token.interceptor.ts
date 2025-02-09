@@ -22,7 +22,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
       console.log('Error en interceptor:', error); // Añade este log
       if (error.status === 401) {
         localStorage.clear();
-        router.navigate(['/login']);
+        router.navigate(['/']);
       }
       return throwError(() => error);
     })
