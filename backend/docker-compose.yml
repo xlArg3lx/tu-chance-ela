@@ -18,7 +18,8 @@ services:
     # Servicio PHP
     app:
         build:
-            context: ./docker/php
+            context: . # El contexto será el directorio backend
+            dockerfile: docker/php/Dockerfile
             args:
                 user: laravel
                 uid: 1000
@@ -26,8 +27,9 @@ services:
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
-            - ./:/var/www
-            - ./storage:/var/www/storage # Separar volúmenes de almacenamiento
+            - .:/var/www
+            - ./storage:/var/www/storage
+
         networks:
             - escuela-network
         environment:
@@ -46,6 +48,10 @@ services:
             MYSQL_USER: ${DB_USERNAME}
             SERVICE_TAGS: dev
             SERVICE_NAME: mysql
+            # MYSQL_DATABASE: ${DB_DATABASE}
+            # MYSQL_ROOT_PASSWORD: root_password # Usa la misma contraseña que pusiste en .env
+            # SERVICE_TAGS: dev
+            # SERVICE_NAME: mysql
         volumes:
             - ./docker/mysql:/docker-entrypoint-initdb.d
             - ./docker/mysql/data:/var/lib/mysql

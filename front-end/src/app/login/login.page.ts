@@ -33,8 +33,8 @@ export class LoginPage implements OnInit {
     private readonly toastCtrl: ToastController
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['admin@example.com', [Validators.required, Validators.email]],
+      password: ['password123', [Validators.required, Validators.minLength(6)]],
     });
   }
 
