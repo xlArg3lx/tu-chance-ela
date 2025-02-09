@@ -1,4 +1,4 @@
-# Tu-Chance-Ela - Backend Laravel 10
+# Tu-Chance-Evaluacion-Laravel-Angular
 
 ## Configuración Inicial del Proyecto
 
