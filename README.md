@@ -51,3 +51,9 @@ docker-compose exec app php artisan migrate --seed
 ```bash
 docker-compose exec app php artisan jwt:secret
 ```
+
+### 9. Aplicación corriendo
+
+```bash
+Acceder: http://localhost:8100
+```
