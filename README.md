@@ -14,24 +14,24 @@ git clone https://github.com/xlArg3lx/tu-chance-ela.git
 cd tu-chance-ela/backend
 ```
 
-### 3. Construir las imágenes con Docker
-
-```bash
-docker-compose build --no-cache
-```
-
-### 4. Correr la aplicación con Docker
-
-```bash
-docker-compose up -d
-```
-
-### 5. Copiar el archivo .env
+### 3. Copiar el archivo .env
 
 ```bash
 Comando para windows: copy .env.example .env
 Comando para linux: cp .env.example .env
 Comando para powerShell: Copy-Item .env.example .env
+```
+
+### 4. Construir las imágenes con Docker
+
+```bash
+docker-compose build --no-cache
+```
+
+### 5. Correr la aplicación con Docker
+
+```bash
+docker-compose up -d
 ```
 
 ### 6. Instalar las dependencias de Laravel
