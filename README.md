@@ -1,5 +1,10 @@
 # Tu-Chance-Evaluacion-Laravel-Angular
 
+## Video presentación evaluación
+```bash
+https://drive.google.com/file/d/1X9xSJT0uq0s5uo15zeHWrBToYnMPNqaG/view?usp=sharing
+```
+
 ## Configuración Inicial del Proyecto
 
 ### 1. Clonar el Repositorio
