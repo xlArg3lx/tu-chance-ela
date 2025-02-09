@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, ModalController } from '@ionic/angular';
+import {
+  IonicModule,
+  LoadingController,
+  ModalController,
+  ToastController,
+} from '@ionic/angular';
 import { Alumno } from 'src/app/interfaces/alumno.interface';
 import { AlumnosService } from 'src/app/services/alumno.service';
 import {
@@ -314,7 +319,9 @@ export class NuevoAlumnoModalComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly modalController: ModalController,
-    private readonly alumnosService: AlumnosService
+    private readonly alumnosService: AlumnosService,
+    private readonly loadingCtrl: LoadingController,
+    private readonly toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -337,7 +344,7 @@ export class NuevoAlumnoModalComponent implements OnInit {
     this.modalController.dismiss();
   }
 
-  guardarAlumno() {
+  async guardarAlumno() {
     if (this.alumnoForm.invalid) {
       this.alumnoForm.markAllAsTouched();
       return;
@@ -349,13 +356,25 @@ export class NuevoAlumnoModalComponent implements OnInit {
       updated_at: new Date().toISOString(),
     };
 
+    const loading = await this.loadingCtrl.create({
+      message: 'Por favor espere...',
+    });
+    await loading.present();
+
     this.alumnosService.crearAlumno(nuevoAlumno).subscribe({
-      next: (alumnoCreado) => {
+      next: async (alumnoCreado) => {
+        await loading.dismiss();
         this.modalController.dismiss(alumnoCreado);
       },
-      error: (error) => {
-        console.error('Error al crear alumno', error);
-        // Puedes agregar un toast o manejo de errores aquí
+      error: async (error) => {
+        await loading.dismiss();
+        const toast = await this.toastCtrl.create({
+          message: error.error.message || 'Error al guardar alumno',
+          duration: 3000,
+          color: 'danger',
+          position: 'bottom',
+        });
+        await toast.present();
       },
     });
   }
