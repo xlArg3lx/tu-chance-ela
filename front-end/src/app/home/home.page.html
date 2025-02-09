@@ -42,6 +42,18 @@
       </ion-item>
     </div>
 
+    <!-- Botón para agregar nuevo alumno -->
+    <ion-button
+      *ngIf="!loading"
+      expand="block"
+      color="primary"
+      class="mb-4"
+      (click)="abrirModalNuevoAlumno()"
+    >
+      <ion-icon name="add" slot="start"></ion-icon>
+      Agregar Nuevo Alumno
+    </ion-button>
+
     <!-- Tabla de Alumnos -->
     <div class="table-container" *ngIf="!loading">
       <table class="custom-table">
@@ -78,12 +90,5 @@
         </tbody>
       </table>
     </div>
-
-    <!-- Botón Flotante para Agregar -->
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button color="primary">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
   </div>
 </ion-content>

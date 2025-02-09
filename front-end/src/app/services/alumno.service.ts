@@ -34,4 +34,8 @@ export class AlumnosService {
       })
     );
   }
+
+  crearAlumno(alumno: Alumno) {
+    return this.http.post<Alumno>(`${this.apiUrl}/crear-alumno`, alumno);
+  }
 }

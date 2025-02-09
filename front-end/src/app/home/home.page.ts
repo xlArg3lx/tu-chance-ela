@@ -2,10 +2,11 @@ import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Alumno } from '../interfaces/alumno.interface';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { AlumnosService } from '../services/alumno.service';
 import { FormsModule } from '@angular/forms';
+import { NuevoAlumnoModalComponent } from './components/nuevo-alumno-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomePage implements OnInit {
   constructor(
     private readonly authService: AuthService,
     private readonly alumnosService: AlumnosService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly modalController: ModalController
   ) {}
 
   ngOnInit() {
@@ -64,6 +66,22 @@ export class HomePage implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  async abrirModalNuevoAlumno() {
+    const modal = await this.modalController.create({
+      component: NuevoAlumnoModalComponent, // Crearemos este componente
+      cssClass: 'nuevo-alumno-modal',
+    });
+
+    modal.onDidDismiss().then((resultado) => {
+      if (resultado.data) {
+        // Si se agregó un nuevo alumno, recarga la lista
+        this.cargarAlumnos();
+      }
+    });
+
+    return await modal.present();
   }
 
   async logout() {
