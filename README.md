@@ -26,19 +26,27 @@ docker-compose build --no-cache
 docker-compose up -d
 ```
 
-### 5. Instalar las dependencias de Laravel
+### 5. Copiar el archivo .env
+
+```bash
+Comando para windows: copy .env.example .env
+Comando para linux: cp .env.example .env
+Comando para powerShell: Copy-Item .env.example .env
+```
+
+### 6. Instalar las dependencias de Laravel
 
 ```bash
 docker-compose exec app composer install
 ```
 
-### 6. Ejecutar migraciones y seeders
+### 7. Ejecutar migraciones y seeders
 
 ```bash
 docker-compose exec app php artisan migrate --seed
 ```
 
-### 7. Generar el JWT Secret
+### 8. Generar el JWT Secret
 
 ```bash
 docker-compose exec app php artisan jwt:secret
