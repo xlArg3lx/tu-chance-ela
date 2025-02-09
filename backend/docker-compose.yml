@@ -27,8 +27,16 @@ services:
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
-            - .:/var/www
+            - ./:/var/www
             - ./storage:/var/www/storage
+            - ./bootstrap/cache:/var/www/bootstrap/cache
+        user: root # Cambiar temporalmente a root para permisos
+        entrypoint:
+            [
+                "/bin/sh",
+                "-c",
+                "chown -R laravel:www-data /var/www/storage /var/www/bootstrap/cache && docker-php-entrypoint php-fpm",
+            ]
 
         networks:
             - escuela-network
